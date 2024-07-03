@@ -68,3 +68,44 @@ app.get("/hello", (req, res) => {
   res.send("Hello World");
 });
 ```
+
+# 5 - SetUp Nodemon
+
+- `npm install dotenv`
+- `npm install -D nodemon`
+- สังเกตpackage.json หลังติดตั้ง
+- เราจะใช้ nodemon app.js แทนคำสั่ง node app.js สำหรับการ auto restart เมื่อมีการเขียนโค้ดใหม่แล้วsave
+- เพื่อความสะดวกเราจะเพิ่มคำสั่ง `script` ใน package.json โดยจะใช้ชื่อว่า `dev`
+
+```js
+{
+  "script": {
+    "dev": "nodemon app.js"
+  }
+}
+```
+
+- เรียกใช้ script ผ่านคำสั่ง `npm run dev` ซึ่งเท่ากับเรารันคำสั่ง `nodemon app.js` ที่ terminalเอง
+
+# 6 - Set up ENV
+
+- `npm install dotenv`
+- สร้างไฟล์ .env `touch .env` เพื่อเก็บค่าตัวแปรสภาพแวดล้อมในการรันโปรแกรม (ส่วนมากเป็นsecret value ที่เราจะไม่pushขึ้นgit)
+- ทดลองเก็บค่าตัวแปรPORT
+
+```env
+PORT=8000
+
+```
+
+- ทำการโหลดตัวแปร env เข้ามาที่ app.js ทำตาม [docs] 
+(https://www.npmjs.com/package/dotenv)  
+
+- เราสามารถเข้าถึงตัวแปรในไฟล์ `.env` ได้ผ่านตัวแปรที่ชื่อว่า `process.env`
+```js
+import 'dotenv/config'
+const PORT = process.env.PORT
+app.listen(PORT, () => {
+  console.log(`app running at port ${PORT}`);
+});
+
