@@ -98,14 +98,41 @@ PORT=8000
 
 ```
 
-- ทำการโหลดตัวแปร env เข้ามาที่ app.js ทำตาม [docs] 
-(https://www.npmjs.com/package/dotenv)  
+- ทำการโหลดตัวแปร env เข้ามาที่ app.js ทำตาม [docs]
+  (https://www.npmjs.com/package/dotenv)
 
 - เราสามารถเข้าถึงตัวแปรในไฟล์ `.env` ได้ผ่านตัวแปรที่ชื่อว่า `process.env`
+
 ```js
-import 'dotenv/config'
-const PORT = process.env.PORT
+import "dotenv/config";
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`app running at port ${PORT}`);
 });
+```
 
+# 7 - เชื่อมDatabase Mongo Atlas ด้วย Mongoose library
+
+- เก็บ ConectionStringของ Atlas ไว้ที่ `.env`
+- ใส่ค่า <> , <DB_NAME> ให้ตรง
+
+```env
+mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.c21xmrh.mongodb.net/<DB_NAME>?retryWrites=true&w=majority&appName=Cluster0
+```
+
+- ทำการติดตั้ง mongoose `npm install mongoose` [docs](https://www.npmjs.com/package/mongoose)
+
+```js
+const MONGO_URI = process.env.MONGO_URI;
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log("Connected!"))
+  .catch((error) => {
+    console.log(error);
+  });
+```
+
+- สร้าง MONGO_URL โดยเอาลิ้งค์มาจาก.env ใส่Method Connect  
+  ถ้าConectสำเร็จให้ขึ้น Connected ถ้าไม่ผ่านให้ขึ้น Error  
+
+  
