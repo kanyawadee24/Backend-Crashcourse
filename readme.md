@@ -49,4 +49,22 @@ app.listen(8000, () => {
 });
 ```
 
-- ลองรันappด้วย `node app.js` จพสังเกตเห็น log ว่า app เรากำลังรันอยู๋
+- ลองรันappด้วย `node app.js` จะสังเกตเห็น log ว่า app เรากำลังรันอยู่
+
+# 4 - First API (GET)
+
+- นำ`app` มาใส่ method `GET`
+- `parameter ตัวแรก` คือ path
+- `parameter ตัวที่สอง` คือ function ที่ใช้จัดการ `HTTP Request` , `HTTP Response`
+
+```js
+app.get("/hello", (req, res) => {});
+```
+
+- ลองเขียน response ตอบกลับไปว่า "Hello World" ด้วย Method `send`
+
+```js
+app.get("/hello", (req, res) => {
+  res.send("Hello World");
+});
+```
